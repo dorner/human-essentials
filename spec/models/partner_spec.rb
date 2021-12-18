@@ -100,6 +100,15 @@ RSpec.describe Partner, type: :model do
     end
   end
 
+  describe '#invite_new_partner' do
+    subject { partner.profile }
+    let(:partner) { create(:partner) }
+
+    it "should add a new partner user when the they change the email of a partner" do
+      expect { partner.update(email: "randomemail@randomemail.com") }.to change { subject.users.count }.by(1)
+    end
+  end
+
   describe '#profile' do
     subject { partner.profile }
     let(:partner) { create(:partner) }
